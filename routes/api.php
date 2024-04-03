@@ -30,3 +30,17 @@ Route::group(['prefix' => 'v1'], function () {
     Route::put('/tasks/{id}', [TaskController::class, 'update']);
     Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 });
+
+/**
+ * Laravel generates automatically 7 routes for Restful API actions
+ * `index, create, store, show, edit, update, destroy`.
+ * 
+ * NOTE: The following code is equivalent to the previous one.
+ * 
+ * However, there are actions that are not necessary for the API, such as `create` and `edit`.
+ * For this reason, it is recommended to use 
+ * ->except(['create', 'edit']) 
+ * to exclude them in order to avoid errors.
+ *  
+ */
+Route::resource('tasks', TaskController::class)->except(['create', 'edit']);
