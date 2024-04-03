@@ -42,4 +42,30 @@ class Task extends Model
         'name',
         'description'
     ];
+
+    /**
+     * @ $hidden: The attributes that should be hidden for arrays.
+     * 
+     * [response without hidden fields]
+     * {
+     *  "id": 1,
+     *  "name": "Task 1",
+     *  "description": "Description of Task 1",
+     *  "created_at": "2021-09-01T00:00:00.000000Z",
+     *  "updated_at": "2021-09-01T00:00:00.000000Z"
+     * }
+     * 
+     * the created_at and updated_at fields will be hidden
+     * [response with hidden fields]
+     * {
+     *  "id": 1,
+     *  "name": "Task 1",
+     *  "description": "Description of Task 1"
+     * }
+     * 
+     */
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
 }
