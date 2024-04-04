@@ -40,7 +40,8 @@ class Task extends Model
      */
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'student_id' // student_id is necessary to create a task
     ];
 
     /**
@@ -68,4 +69,9 @@ class Task extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }
