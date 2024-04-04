@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\StudentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,3 +45,5 @@ Route::group(['prefix' => 'v1'], function () {
  *  
  */
 Route::resource('tasks', TaskController::class)->except(['create', 'edit']);
+
+Route::resource('students', StudentController::class)->except(['create', 'edit']);
