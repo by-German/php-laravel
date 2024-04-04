@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Student;
 
 class TaskController extends Controller
 {
@@ -19,7 +20,8 @@ class TaskController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:5|max:20',
-            'description' => 'required'
+            'description' => 'required',
+            "student_id" => "required|exists:students,id",
         ]);
 
         if ($validator->fails()) {
@@ -69,5 +71,30 @@ class TaskController extends Controller
         return response()->json([
             "message" => "Task deleted successfully."
         ], 200); // if code is 204 then no content is returned "{}" 
+    }
+
+    public function getTasksByStudent(string $student_id)
+    {
+        // query alternative
+        // -----------------
+        // $tasks = Task::where('student_id', $student_id)->get();
+        // return response()->json($tasks, 200);
+
+        // array alternative
+        // -----------------
+        // $tasks = Task::all();
+        // $tasksByStudent = [];
+        // foreach ($tasks as $task) {
+        //     if ($task->student_id == $student_id) {
+        //         array_push($tasksByStudent, $task);
+        //     }
+        // }
+        // return response()->json($tasksByStudent, 200);
+
+        // ORM alternative
+        // ---------------
+        $student = Student::find($student_id);
+        $tasks = $student->tasks;
+        return response()->json($tasks, 200);
     }
 }

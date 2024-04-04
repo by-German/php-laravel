@@ -47,3 +47,7 @@ Route::group(['prefix' => 'v1'], function () {
 Route::resource('tasks', TaskController::class)->except(['create', 'edit']);
 
 Route::resource('students', StudentController::class)->except(['create', 'edit']);
+
+// route for get all tasks from a student
+// the controller recommended is TaskController because the action is related to tasks
+Route::get('/students/{student_id}/tasks', [TaskController::class, 'getTasksByStudent']);
